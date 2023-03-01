@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StuffTester
 {
-    class ExceptionSandbox<T> where T : Exception
+    public class ExceptionSandbox<T> where T : Exception
     {
         public Action<T> Catch { get; set; }
 

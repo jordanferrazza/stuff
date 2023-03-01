@@ -21,44 +21,39 @@ namespace StuffProject
 
         public T Undo()
         {
-            if (!CanUndo()) throw new InvalidOperationException("Cannot undo further.");
+            if (!CanUndo) throw new InvalidOperationException("Cannot undo further.");
             --Index;
-            return State();
+            return State;
         }
         public T Redo()
         {
-            if (!CanRedo()) throw new InvalidOperationException("Cannot redo further.");
+            if (!CanRedo) throw new InvalidOperationException("Cannot redo further.");
             ++Index;
-            return State();
+            return State;
         }
 
-        public T State()
+        public T State
         {
-            if (History.Count == 0)
-                return default;
-            if (History.Count == 1)
-                return History[0];
-            return History[Index - 1];
+            get{
+                if (History.Count == 0)
+                    return default;
+                if (History.Count == 1)
+                    return History[0];
+                return History[Index - 1];
+            }
         }
-
         public void Clear()
         {
             Index = 0;
             History.Clear();
         }
 
-        public bool CanUndo()
-        {
-            return Index > 1;
-        }
-        public bool CanRedo()
-        {
-            return Index < History.Count;
-        }
-        public int Length()
-        {
-            return History.Count();
-        }
+        public bool CanUndo => Index > 1;
+
+        public bool CanRedo => Index < History.Count;
+
+        public int Length => History.Count();
+
 
         public T[] List()
         {
@@ -71,7 +66,7 @@ namespace StuffProject
 
         public void ClearFuture()
         {
-            if (CanRedo())
+            if (CanRedo)
                 History.RemoveRange(Index, History.Count - Index);
         }
     }

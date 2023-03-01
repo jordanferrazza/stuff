@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleExt.cs" />
+    <Compile Include="ExceptionSandbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UndoHistory.cs" />
   </ItemGroup>

@@ -1,0 +1,11 @@
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffTester.exe.config
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffTester.exe
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffTester.pdb
+C:\Users\jorda\source\repos\StuffTester\obj\Debug\StuffTester.csproj.CoreCompileInputs.cache
+C:\Users\jorda\source\repos\StuffTester\obj\Debug\StuffTester.exe
+C:\Users\jorda\source\repos\StuffTester\obj\Debug\StuffTester.pdb
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffProject.dll
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffProject.pdb
+C:\Users\jorda\source\repos\StuffTester\bin\Debug\StuffProject.dll.config
+C:\Users\jorda\source\repos\StuffTester\obj\Debug\StuffTester.csproj.AssemblyReference.cache
+C:\Users\jorda\source\repos\StuffTester\obj\Debug\StuffTester.csproj.CopyComplete

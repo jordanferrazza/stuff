@@ -1,7 +1,0 @@
-C:\Users\jorda\source\repos\StuffProject\bin\Debug\StuffProject.dll.config
-C:\Users\jorda\source\repos\StuffProject\bin\Debug\StuffProject.dll
-C:\Users\jorda\source\repos\StuffProject\bin\Debug\StuffProject.pdb
-C:\Users\jorda\source\repos\StuffProject\obj\Debug\StuffProject.csproj.AssemblyReference.cache
-C:\Users\jorda\source\repos\StuffProject\obj\Debug\StuffProject.csproj.CoreCompileInputs.cache
-C:\Users\jorda\source\repos\StuffProject\obj\Debug\StuffProject.dll
-C:\Users\jorda\source\repos\StuffProject\obj\Debug\StuffProject.pdb

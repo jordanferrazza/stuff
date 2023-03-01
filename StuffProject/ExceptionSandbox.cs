@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StuffProject
+namespace StuffProject.Toolbox
 {
     public class ExceptionSandbox<T> where T : Exception
     {

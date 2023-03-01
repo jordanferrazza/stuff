@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StuffProject;
+using StuffProject.ConsoleExt;
 
 namespace StuffTester
 {
@@ -22,10 +23,10 @@ namespace StuffTester
             
             while (true)
             {
-                switch (ConsoleExt.Menu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
+                switch (ConsoleMenu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
                 {
                     case 0:
-                        switch (ConsoleExt.Menu.Show("TEST...", "<<", "UndoHistory"))
+                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory"))
                         {
                             case 1:
                                 testUndoHistory();

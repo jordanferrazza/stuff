@@ -114,12 +114,12 @@ namespace StuffTester
 Welcome to StuffTester 
 StuffProject, StuffTester by Jordan Ferrazza (C) 2023
 ", ConsoleColor.White);
-            ConsoleExt.Separator(false);
+            ConsoleExt.Separator();
             Console.WriteLine(@"
 Classes not or less included due to being tested in tester app itself:
 ExceptionSandbox, ConsoleExt interface
 ");
-            ConsoleExt.Separator(false);
+            ConsoleExt.Separator();
             ConsoleExt.Pause();
         }
         static void testUndoHistory()

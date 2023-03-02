@@ -92,6 +92,7 @@ namespace StuffProject.ConsoleExt
                     default:
                         if (!int.TryParse(key.ToString(), out int r) || r <= 0 || r > args.Length)
                             break;
+
                         else
                             return r - 1;
                 }

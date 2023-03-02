@@ -52,7 +52,7 @@ namespace StuffProject
         }
 
         /// <summary>
-        /// Go back one state. Newers states not affected until <c>Write(T)</c>  or <c>ClearFuture</c> are used.
+        /// Go back one state. Newers states not affected until <c>Write(T)</c>  or <c>ClearFuture()</c> are used.
         /// </summary>
         /// <exception cref="InvalidOperationException">The Index represents the earliest state, or no states exist.</exception>
         /// <returns></returns>

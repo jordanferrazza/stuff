@@ -57,6 +57,7 @@ namespace StuffProject.Toolbox
         /// Adds an item to the Listonary.
         /// </summary>
         ///<exception cref="ArgumentException">Attempt to add a key that was already found in the list.</exception>
+        ///<param name="item">The object being addded.</param>
         public void Add(TValue item)
         {
             if (ContainsKey(Func(item))) throw new ArgumentException("The resulting key is already in the list.");

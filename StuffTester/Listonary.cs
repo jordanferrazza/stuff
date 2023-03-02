@@ -53,6 +53,10 @@ namespace StuffProject.Toolbox
 
         public bool IsReadOnly => false;
 
+        ///<summary>
+        /// Adds an item to the Listonary.
+        /// </summary>
+        ///<exception cref="ArgumentException">Attempt to add a key that was already found in the list.</exception>
         public void Add(TValue item)
         {
             if (ContainsKey(Func(item))) throw new ArgumentException("The resulting key is already in the list.");
@@ -63,6 +67,7 @@ namespace StuffProject.Toolbox
         {
             List.Clear();
         }
+
 
         public bool Contains(TValue item)
         {

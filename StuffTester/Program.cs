@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using StuffProject;
 using StuffProject.ConsoleExt;
 using StuffProject.Toolbox;
 using StuffProject.Toolbox.Extensions;
+using StuffProject.Toolbox.Forms;
 
 namespace StuffTester
 {
@@ -48,7 +50,7 @@ namespace StuffTester
                 switch (ConsoleMenu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
                 {
                     case 0:
-                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu","Listonary"))
+                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu","Listonary","CustMsgBox"))
                         {
                             case 1:
                                 testUndoHistory();
@@ -64,6 +66,9 @@ namespace StuffTester
                                 break;
                             case 3:
                                 testListonary();
+                                break;
+                            case 4:
+                                testCustMsgBox();
                                 break;
                         }
                         break;
@@ -165,6 +170,31 @@ q = Back", ConsoleColor.White);
                     Console.WriteLine("CanRedo =     " + undo.CanRedo);
                 });
             }
+        }
+
+        static void testCustMsgBox()
+        {
+            ES.Run(()=>{
+                var d1 = new CustMsgBox("Test message box", "Hello", System.Windows.Forms.MessageBoxIcon.None, "Really Long Custom Text", "Short Text");
+                d1.StartPosition = FormStartPosition.CenterScreen;
+                d1.ShowDialog();
+                Console.WriteLine(d1.MsgBoxResultIndex);
+                Console.WriteLine(d1.DialogResult);
+                switch (d1.MsgBoxResultIndex)
+                {
+                    case 0:
+                        break;
+                    default:
+                        ConsoleExt.Pause();
+                        return;
+                }
+                var d2 = new CustMsgBox("Test message box", "Hello", MessageBoxIcon.Exclamation, new Dictionary<string, DialogResult> { ["Yes"] = DialogResult.Yes, ["No"] = DialogResult.No, ["Cancel"] = DialogResult.Cancel });
+                d2.StartPosition = FormStartPosition.CenterScreen;
+                d2.ShowDialog();
+                Console.WriteLine(d2.MsgBoxResultIndex);
+                Console.WriteLine(d2.DialogResult);
+                ConsoleExt.Pause();
+            });
         }
     }
 }

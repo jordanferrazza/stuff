@@ -38,6 +38,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleExt.cs" />
+    <Compile Include="CustMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustMsgBox.designer.cs">
+      <DependentUpon>CustMsgBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExceptionSandbox.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Listonary.cs" />
@@ -55,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustMsgBox.resx">
+      <DependentUpon>CustMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

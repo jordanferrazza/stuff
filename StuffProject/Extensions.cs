@@ -16,7 +16,7 @@ namespace StuffProject.Toolbox.Extensions
         /// <param name="input"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static TOutput Get<TInput,TOutput>(this TInput input, Func<TInput,TOutput> func)
+        public static TOutput Get<TInput, TOutput>(this TInput input, Func<TInput, TOutput> func)
         {
             return func(input);
         }
@@ -42,5 +42,16 @@ namespace StuffProject.Toolbox.Extensions
         {
             return string.Join(separator, input.ToArray());
         }
+        /// <summary>
+        /// Quickly cast an object by suffixing a generic rather than prefixing a type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static T CastTo<T>(this object input)
+        {
+            return (T)input;
+        }
+
     }
 }

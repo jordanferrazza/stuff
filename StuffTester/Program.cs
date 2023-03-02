@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using StuffProject;
 using StuffProject.ConsoleExt;
 using StuffProject.Toolbox;
+using StuffProject.Toolbox.Extensions;
 
 namespace StuffTester
 {
@@ -21,26 +22,37 @@ namespace StuffTester
         static void Main(string[] args)
         {
             ReadMe();
-            
+
             while (true)
             {
                 switch (ConsoleMenu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
                 {
                     case 0:
-                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory"))
+                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu"))
                         {
                             case 1:
                                 testUndoHistory();
+                                break;
+                            case 2:
+                                ES.Run(() =>
+                                {
+                                    Console.WriteLine(ConsoleMenu.ShowInline("Test menu", "Option 1", "Option 2", "Option 3"));
+                                    Console.WriteLine(ConsoleMenu.ShowInlineSimple("Test menu", "Option 1", "Option 2", "Option 3"));
+
+                                });
+                                ConsoleExt.Pause();
                                 break;
                         }
                         break;
                     case 1:
                         ReadMe();
-                        break;                 
+                        break;
                     default:
-                        return;
+                        Console.CursorTop = (Console.WindowHeight / 2) - 7;
+                        if (ConsoleMenu.ShowInline("Are you sure you want to quit?", "No", "Yes") == 1)
+                            return;
+                        break;
                 }
-
 
 
 
@@ -56,10 +68,10 @@ namespace StuffTester
             ConsoleExt.WriteLine(@"
 Welcome to StuffTester 
 StuffProject, StuffTester by Jordan Ferrazza (C) 2023
-",ConsoleColor.White);
+", ConsoleColor.White);
             ConsoleExt.Separator();
             Console.WriteLine(@"
-Classes not included due to being tested in tester app itself:
+Classes not or less included due to being tested in tester app itself:
 ExceptionSandbox, ConsoleExt interface
 ");
             ConsoleExt.Separator();
@@ -100,8 +112,8 @@ q = Back", ConsoleColor.White);
                     }
                     else return;
                     Console.WriteLine("ind =         " + ind);
-                    Console.WriteLine("ListToIndex = " + string.Join(",", undo.ListToIndex()));
-                    Console.WriteLine("List  =       " + string.Join(",", undo.List()));
+                    Console.WriteLine("ListToIndex = " + undo.ListToIndex().Get(value => string.Join(", ", value)));
+                    Console.WriteLine("List  =       " + undo.List().Get(value => string.Join(", ", value)));
                     Console.WriteLine("State =       " + undo.State);
                     Console.WriteLine("Index =       " + undo.Index);
                     Console.WriteLine("CanUndo =     " + undo.CanUndo);

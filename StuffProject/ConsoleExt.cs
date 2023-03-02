@@ -16,7 +16,6 @@ namespace StuffProject.ConsoleExt
             while (true)
             {
                 Console.Clear();
-
                 var o = new List<string>();
                 Console.Write($"~({ii + 1}-");
                 for (int i = ii; i < args.Length && i < ii + 8; i++)
@@ -30,10 +29,9 @@ namespace StuffProject.ConsoleExt
                 Console.CursorLeft = left + 1 + ((Console.WindowWidth - left - 1 - msg.Length) / 2);
                 if (i2 >= ii + 7) o.Add("(NEXT PAGE)");
                 else if (i2 >= args.Length - 1 && ii != 0) o.Add("(FIRST PAGE)");
-                var p = _Show(msg, o.ToArray());
+                var p = ShowInline(msg, 2, o.ToArray());
                 Console.Clear();
 
-                Console.WriteLine("Please Wait...");
                 if (p == Math.Min(8, args.Length - ii))
                     if (o[p] == "(FIRST PAGE)") ii = 0;
                     else ii += 8;
@@ -45,24 +43,39 @@ namespace StuffProject.ConsoleExt
             }
 
         }
-        private static int _Show(string msg, params string[] args)
+        public static int ShowInline(string msg, params string[] args)
+        {
+            return ShowInline(msg, 1, args);
+        }
+        public static int ShowInlineSimple(string msg, params string[] args)
+        {
+            return ShowInline(msg, 0, args);
+        }
+        private static int ShowInline(string msg, int decor, params string[] args)
         {
             var l = 0;
+
+            if (args.Length == 0 || args.Length > 10) throw new ArgumentException("No or too many args. Show() has functionality to filter by page.");
+            if (decor == 1) ConsoleExt.Separator();
+
             Console.WriteLine(msg);
             while (true)
             {
                 var top = Console.CursorTop;
+                if (decor == 1) ConsoleExt.Separator();
 
                 var i = 0;
-
+                Console.WriteLine();
                 foreach (var item in args)
                 {
                     ConsoleExt.WriteLine($"{i + 1}{(l == i ? "> " : "  ")}{item}", l == i ? ConsoleColor.Yellow : Console.ForegroundColor);
                     i++;
                 }
                 var top2 = Console.CursorTop;
-                Console.CursorTop = Console.WindowHeight - 2;
+                if (decor == 2) Console.CursorTop = Console.WindowHeight - 2;
+                else Console.WriteLine();
                 Console.WriteLine("[W] UP  [S] DOWN  [SPACEBAR]/[ENTER] SELECT  [1-9] QUICK SELECT");
+                if (decor == 1) ConsoleExt.Separator();
                 var key = Console.ReadKey(true).KeyChar;
                 switch (key)
                 {
@@ -90,7 +103,7 @@ namespace StuffProject.ConsoleExt
 
     public static class ConsoleExt
     {
-  
+
         static ConsoleColor oldColour;
 
         public static Action<ConsoleColor> startWrite = (c) =>

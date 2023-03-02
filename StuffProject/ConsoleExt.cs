@@ -116,37 +116,41 @@ namespace StuffProject.ConsoleExt
             Console.ForegroundColor = oldColour;
         };
 
-        public static void Pause()
+        public static void Pause(bool plain = false)
         {
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
+            ConsoleExt.RunInColor(plain ? Console.ForegroundColor : ConsoleColor.Yellow, () =>
+            {
+
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            });
+
         }
 
-        public static void Separator()
+        public static void Separator(bool plain = true)
         {
-            Console.Write(new string('~', Console.WindowWidth));
+            ConsoleExt.RunInColor(plain ? Console.ForegroundColor : ConsoleColor.Yellow, () =>
+            {
+                Console.Write(new string('~', Console.WindowWidth));
+            });
         }
 
         public static void Write(object value, ConsoleColor color)
         {
-            try
-            {
-                startWrite(color);
-                Console.Write(value);
-                endWrite(color);
-            }
-            catch
-            {
-                endWrite(color);
-                throw;
-            }
+            RunInColor(color, () => Console.Write(value));
         }
         public static void WriteLine(object value, ConsoleColor color)
+        {
+            RunInColor(color, () => Console.WriteLine(value));
+
+        }
+
+        public static void RunInColor(ConsoleColor color, Action func)
         {
             try
             {
                 startWrite(color);
-                Console.WriteLine(value);
+                func();
                 endWrite(color);
             }
             catch

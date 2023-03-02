@@ -10,15 +10,35 @@ using StuffProject.Toolbox.Extensions;
 
 namespace StuffTester
 {
+    class TestObject<T>
+    {
+        public TestObject(string name, T value)
+        {
+            Name = name;
+            Value = value;
+
+        }
+
+        public override string ToString()
+        {
+            return $"[{Name}, {Value}]";
+        }
+
+        public string Name { get; set; }
+
+        public T Value { get; set; }
+    }
+
     class Program
     {
+
         static ExceptionSandbox<Exception> ES = new ExceptionSandbox<Exception>(
-               () => ConsoleExt.WriteLine("\nEntered ExceptionSandbox", ConsoleColor.Yellow),
+               () => ConsoleExt.WriteLine("\n:) Entered ExceptionSandbox", ConsoleColor.Yellow),
                 (x) =>
             {
-                ConsoleExt.WriteLine("ExceptionSandbox caught an error!", ConsoleColor.Yellow);
+                ConsoleExt.WriteLine("xO ExceptionSandbox caught an error!", ConsoleColor.Yellow);
                 ConsoleExt.WriteLine(x, ConsoleColor.Red);
-            }, () => ConsoleExt.WriteLine("Exited ExceptionSandbox", ConsoleColor.Yellow));
+            }, () => ConsoleExt.WriteLine(":D Exited ExceptionSandbox", ConsoleColor.Yellow));
         static void Main(string[] args)
         {
             ReadMe();
@@ -28,7 +48,7 @@ namespace StuffTester
                 switch (ConsoleMenu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
                 {
                     case 0:
-                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu"))
+                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu","Listonary"))
                         {
                             case 1:
                                 testUndoHistory();
@@ -41,6 +61,9 @@ namespace StuffTester
 
                                 });
                                 ConsoleExt.Pause();
+                                break;
+                            case 3:
+                                testListonary();
                                 break;
                         }
                         break;
@@ -62,6 +85,28 @@ namespace StuffTester
 
 
         }
+
+        private static void testListonary()
+        {
+            var o = new Listonary<string, TestObject<string>>((x) => x.Name);
+            o.Add(new TestObject<string>("Hello", "hello world"));
+            o.Add(new TestObject<string>("Fox", "the quick brown fox jumped over the lazy dog"));
+            o.Add(new TestObject<string>("Foobar", "foo bar"));
+            o.Add(new TestObject<string>("Bye", "bye"));
+
+            ES.Run(() =>
+            {
+                Console.WriteLine("[Fox] = " + o["Fox"]);
+                Console.WriteLine("ToDictionary() = " + o.ToDictionary().ToStringConcat(","));
+                Console.WriteLine("Keys = " + o.Keys.ToStringConcat(","));
+                Console.WriteLine("Values = " + o.Values.ToStringConcat(","));
+                Console.WriteLine("ContainsKey() = " + o.ContainsKey("Hello"));
+                Console.WriteLine("ContainsKey() = " + o.ContainsKey("Dog"));
+            });
+
+            ConsoleExt.Pause();
+        }
+
         static void ReadMe()
         {
             Console.Clear();
@@ -69,12 +114,12 @@ namespace StuffTester
 Welcome to StuffTester 
 StuffProject, StuffTester by Jordan Ferrazza (C) 2023
 ", ConsoleColor.White);
-            ConsoleExt.Separator();
+            ConsoleExt.Separator(false);
             Console.WriteLine(@"
 Classes not or less included due to being tested in tester app itself:
 ExceptionSandbox, ConsoleExt interface
 ");
-            ConsoleExt.Separator();
+            ConsoleExt.Separator(false);
             ConsoleExt.Pause();
         }
         static void testUndoHistory()
@@ -112,8 +157,8 @@ q = Back", ConsoleColor.White);
                     }
                     else return;
                     Console.WriteLine("ind =         " + ind);
-                    Console.WriteLine("ListToIndex = " + undo.ListToIndex().Get(value => string.Join(", ", value)));
-                    Console.WriteLine("List  =       " + undo.List().Get(value => string.Join(", ", value)));
+                    Console.WriteLine("ListToIndex = " + undo.ListToIndex().ToStringConcat(","));
+                    Console.WriteLine("List  =       " + undo.List().ToStringConcat(","));
                     Console.WriteLine("State =       " + undo.State);
                     Console.WriteLine("Index =       " + undo.Index);
                     Console.WriteLine("CanUndo =     " + undo.CanUndo);

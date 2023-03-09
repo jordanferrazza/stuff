@@ -9,6 +9,7 @@ using StuffProject.ConsoleExt;
 using StuffProject.Toolbox;
 using StuffProject.Toolbox.Extensions;
 using StuffProject.Toolbox.Forms;
+using StuffProject.Toolbox.Special;
 
 namespace StuffTester
 {
@@ -50,7 +51,7 @@ namespace StuffTester
                 switch (ConsoleMenu.Show("MAIN MENU", "TEST...", "ABOUT", "EXIT"))
                 {
                     case 0:
-                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu","Listonary","CustMsgBox"))
+                        switch (ConsoleMenu.Show("TEST...", "<<", "UndoHistory", "ConsoleMenu", "Listonary", "CustMsgBox", "ExplodeString"))
                         {
                             case 1:
                                 testUndoHistory();
@@ -70,6 +71,9 @@ namespace StuffTester
                             case 4:
                                 testCustMsgBox();
                                 break;
+                            case 5:
+                                testExplodeString();
+                                break;
                         }
                         break;
                     case 1:
@@ -88,6 +92,20 @@ namespace StuffTester
 
             }
 
+
+        }
+
+        private static void testExplodeString()
+        {
+            ES.Run(() =>
+            {
+                var o = new ExplodeString("{", "}", ",", "\\");
+                foreach (var item in o.Run("Hello {A,B,C,D} I am {E,F,G,H}."))
+                {
+                    Console.WriteLine(item);
+                }
+            });
+            ConsoleExt.Pause();
 
         }
 
@@ -174,7 +192,8 @@ q = Back", ConsoleColor.White);
 
         static void testCustMsgBox()
         {
-            ES.Run(()=>{
+            ES.Run(() =>
+            {
                 var d1 = new CustMsgBox("Test message box", "Hello", System.Windows.Forms.MessageBoxIcon.None, "Really Long Custom Text", "Short Text");
                 d1.StartPosition = FormStartPosition.CenterScreen;
                 d1.ShowDialog();

@@ -86,7 +86,7 @@ namespace StuffProject
                     return default;
                 if (History.Count == 1)
                     return History[0];
-                return History[Index - 1];
+                return History[Index-1];
             }
         }
 

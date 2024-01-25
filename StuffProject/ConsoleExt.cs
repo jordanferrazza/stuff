@@ -76,6 +76,7 @@ namespace StuffProject.ConsoleExt
                 else Console.WriteLine();
                 Console.WriteLine("[W] UP  [S] DOWN  [SPACEBAR]/[ENTER] SELECT  [1-9] QUICK SELECT");
                 if (decor == 1) ConsoleExt.Separator();
+                if (Console.CursorLeft != 0) Console.Write("\n");
                 var key = Console.ReadKey(true).KeyChar;
                 switch (key)
                 {
